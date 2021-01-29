@@ -74,6 +74,44 @@ using Quotient::Settings;
 using Quotient::AccountSettings;
 using Quotient::Uri;
 
+{
+	void MainWindow::resizeEvent(QResizeEvent *newsize)
+{
+
+    int width =  newsize ->size().width().
+    int heigth = newsize ->size().heigth().
+    int area = width * height;
+    bool esLandscape = width > heigth ; 
+    if(esLandscape && width > 1980) {
+        std:: cout <<"landscape Low DPI \n";
+
+        if (area % 2 == 0)
+
+        {
+        std:: cout << "area e par \n";
+        }
+    }
+    else if (esLandscape)
+    {
+    	std:: cout<< "landscape Low DPI \n";
+    }
+    else if ( width == heigth)
+    {
+    	std:: cout<< "Portrait \n";
+    }
+    else if (esLandscape && heigth > 1980)
+    {
+    	std:: cout<< "Portrait High DPI \n";
+    }
+    else {
+    	std:: cout<< "Portrait low DPI \n";
+    }
+    std:: cout << "SE MODIFICO EL TAMAÑO  (" << width << "," << heigth << ") \n";
+    std:: cout << "El area es :" <<area << "\n"
+}
+}
+
+
 MainWindow::MainWindow()
 {
     Connection::setRoomType<QuaternionRoom>();
