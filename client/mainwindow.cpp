@@ -18,7 +18,7 @@
  **************************************************************************/
 
 #include "mainwindow.h"
-
+#include<iostream>
 #include "roomlistdock.h"
 #include "userlistdock.h"
 #include "chatroomwidget.h"
@@ -74,13 +74,14 @@ using Quotient::Settings;
 using Quotient::AccountSettings;
 using Quotient::Uri;
 
-{
+
 	void MainWindow::resizeEvent(QResizeEvent *newsize)
 {
 
-    int width =  newsize ->size().width().
-    int heigth = newsize ->size().heigth().
-    int area = width * height;
+    int width =  newsize ->size().width();
+    int heigth = newsize ->size().height();
+    int area = width * heigth;
+
     bool esLandscape = width > heigth ; 
     if(esLandscape && width > 1980) {
         std:: cout <<"landscape Low DPI \n";
@@ -106,9 +107,8 @@ using Quotient::Uri;
     else {
     	std:: cout<< "Portrait low DPI \n";
     }
-    std:: cout << "SE MODIFICO EL TAMAÑO  (" << width << "," << heigth << ") \n";
-    std:: cout << "El area es :" <<area << "\n"
-}
+    std:: cout << "se a modificado el tamaño de la pantalla.(" << width << "," << heigth << ") \n";
+    std:: cout << "El area es :" <<area << "\n";
 }
 
 

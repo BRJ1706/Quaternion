@@ -63,6 +63,7 @@ void loadTranslations(
 
 int main( int argc, char* argv[] )
 {
+    //podemmos cambiar el \n por endl  despues de
     std::cout << "EL ingeniero Pfister es nuestro Favorito. \n";
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
