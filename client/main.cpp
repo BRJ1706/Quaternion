@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.  *
  *                                                                        *
  **************************************************************************/
-#include<iostream>
+#include <iostream>
 
 #include <QtWidgets/QApplication>
 #include <QtCore/QTranslator>
@@ -32,6 +32,13 @@
 #include "activitydetector.h"
 #include "linuxutils.h"
 #include <settings.h>
+
+enum OpcionDeInicio {
+
+    Visible = 0,
+    NoVisible = 1,
+    Ninguno = 2
+};
 
 void loadTranslations(
         std::initializer_list<std::pair<QStringList, QString>> translationConfigs)
@@ -63,9 +70,6 @@ void loadTranslations(
 
 int main( int argc, char* argv[] )
 {
-    //podemmos cambiar el \n por endl  despues de
-    std::cout << "EL ingeniero Pfister es nuestro Favorito. \n";
-
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     QApplication::setAttribute(Qt::AA_DisableWindowContextHelpButton);
 #endif
@@ -187,13 +191,42 @@ int main( int argc, char* argv[] )
         qInfo() << "Debug mode enabled";
         window.enableDebug();
     }
+    
+    char seleccion = '\0';
+    OpcionDeInicio opcion = OpcionDeInicio::Ninguno;
+    //OpcionDeInicio opcion = 2;
+
+    while(opcion == OpcionDeInicio::Ninguno) {
+    
+        std::cout << "Desea que la aplicacion empieze [v]isible o [n]o visible?\n";
+        std::cin >> seleccion;
+
+        switch(seleccion) {
+
+            case 'h':
+            case 'N':
+            case 'n':
+            case 'H':
+                opcion = OpcionDeInicio::NoVisible;
+                break;
+            case 'V':
+            case 'v':
+            case 'm':
+            case 'M':
+                opcion = OpcionDeInicio::Visible;
+                break;
+            default:
+                std::cout << "La opcion '" << seleccion << "' no es valida.\n";
+                break;
+        }
+    }
 
     ActivityDetector ad(app, window); Q_UNUSED(ad);
-    if (parser.isSet(hideMainWindow)) {
+    if (opcion == OpcionDeInicio::NoVisible) { //if (parser.isSet(hideMainWindow)) {
         qDebug() << "--- Hide time!";
         window.hide();
     }
-    else {
+    else if (opcion == OpcionDeInicio::Visible) {
         qDebug() << "--- Show time!";
         window.show();
     }

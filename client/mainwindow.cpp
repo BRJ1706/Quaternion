@@ -18,7 +18,9 @@
  **************************************************************************/
 
 #include "mainwindow.h"
-#include<iostream>
+
+#include <iostream>
+
 #include "roomlistdock.h"
 #include "userlistdock.h"
 #include "chatroomwidget.h"
@@ -74,43 +76,33 @@ using Quotient::Settings;
 using Quotient::AccountSettings;
 using Quotient::Uri;
 
+void MainWindow::keyPressEvent(QKeyEvent *event) {
 
-	void MainWindow::resizeEvent(QResizeEvent *newsize)
-{
+    Qt::KeyboardModifiers mod = event->modifiers();
 
-    int width =  newsize ->size().width();
-    int heigth = newsize ->size().height();
-    int area = width * heigth;
+    // 48 - 57 corresponde a 0 - 9
+    int key = event->key();
 
-    bool esLandscape = width > heigth ; 
-    if(esLandscape && width > 1980) {
-        std:: cout <<"landscape Low DPI \n";
+    std::cout << "boton presionado: " << key << "\n";
 
-        if (area % 2 == 0)
+    /*
+    Modificar de tal form que:
+    - ctl + 1 -> 100x100
+    - ctl + 2 -> 200x200
+    ...
+    - ctl + 9 -> 900x900
+    */
+    switch(mod) {
 
-        {
-        std:: cout << "area e par \n";
-        }
-    }
-    else if (esLandscape)
-    {
-    	std:: cout<< "landscape Low DPI \n";
-    }
-    else if ( width == heigth)
-    {
-    	std:: cout<< "Portrait \n";
-    }
-    else if (esLandscape && heigth > 1980)
-    {
-    	std:: cout<< "Portrait High DPI \n";
-    }
-    else {
-    	std:: cout<< "Portrait low DPI \n";
-    }
-    std:: cout << "se a modificado el tamaño de la pantalla.(" << width << "," << heigth << ") \n";
-    std:: cout << "El area es :" <<area << "\n";
+        case Qt::ControlModifier:
+            if(key == 48) {
+                resize(300, 300);
+            }
+            break;
+        default:
+            QWidget::keyPressEvent(event);
+    }    
 }
-
 
 MainWindow::MainWindow()
 {
@@ -159,6 +151,8 @@ MainWindow::MainWindow()
     busyLabel->show();
     busyIndicator->start();
     QTimer::singleShot(0, this, SLOT(invokeLogin()));
+
+    setFocusPolicy(Qt::ClickFocus);
 }
 
 MainWindow::~MainWindow()
