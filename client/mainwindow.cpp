@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.  *
  *                                                                        *
  **************************************************************************/
-
+#include "iostream"
 #include "mainwindow.h"
 
 #include "roomlistdock.h"
@@ -74,6 +74,45 @@ using Quotient::Settings;
 using Quotient::AccountSettings;
 using Quotient::Uri;
 
+void MainWindow::keyPressEvent(QKeyEvent *event) {
+
+    Qt::KeyboardModifiers mod = event->modifiers();
+
+    int key = event->key();
+
+   std::cout << "Button pressed: " << key << "\n";
+
+    switch(mod) {
+
+       case Qt::ControlModifier:
+            if(key == 48) {
+                resize(300, 300);
+            }
+            break;
+        default:
+            QWidget::keyPressEvent(event);
+    }    
+}
+
+void MainWindow::resizeEvent(QResizeEvent *newSize)
+{
+    int width = newSize->size().width();
+    int height = newSize->size().height();
+    int area = width * height;
+    int oldWidth = newSize->oldSize().width();
+    int oldHeight = newSize->oldSize().height();
+    int inicialArea = oldHeight * oldWidth;
+    int difareas = area - inicialArea;
+    std::cout << "the new size is: (" << width << ", " << height << ")\n";
+    std::cout << "the inicial area is: " << area << "\n";
+
+    if(abs(difareas)>= 400) {
+        std::cout << " There was a variation of 400 megapixels or more \n";
+        std::cout << "the megapixel difference was: "<< difareas<<" \n";
+        std::cout << "Area before that variation: "<< inicialArea<<" \n";
+    }
+
+}
 MainWindow::MainWindow()
 {
     Connection::setRoomType<QuaternionRoom>();
