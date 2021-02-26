@@ -18,7 +18,8 @@
  **************************************************************************/
 
 #pragma once
-
+#include <iostream>
+#include <vector>
 #include "accountregistry.h"
 
 #include <uriresolver.h>
@@ -105,6 +106,7 @@ class MainWindow: public QMainWindow, public Quotient::UriResolverBase {
         bool visitNonMatrix(const QUrl& url) override;
 
     private:
+        
         AccountRegistry accountRegistry;
         QVector<Connection*> logoutOnExit;
         QVector<Connection*> firstSyncing;
