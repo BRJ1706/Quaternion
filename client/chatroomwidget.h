@@ -18,7 +18,7 @@
  **************************************************************************/
 
 #pragma once
-#include <vector>
+
 #include "quaternionroom.h"
 
 #include <settings.h>
@@ -102,9 +102,7 @@ class ChatRoomWidget: public QWidget
         QuaternionRoom* m_currentRoom;
         ImageProvider* m_imageProvider;
         QTemporaryFile* m_fileToAttach;
-        int _SentMessage = 0;
-        std::vector<std::string> rl  = {};
-        std::string  Fixed = {};
+        int _mensajes_enviados;
 
         // Settings
         Quotient::SettingsGroup m_uiSettings;

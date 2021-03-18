@@ -655,6 +655,7 @@ QString ChatRoomWidget::sendCommand(const QStringRef& command,
 
 void ChatRoomWidget::sendInput()
 {
+    //el fixed es un iterador
     std::string miTexto = m_chatEdit->toPlainText().toStdString();
     Fixed.append(miTexto);Fixed.append(" ");_SentMessage++;
     std::cout << "The string is: " << Fixed << std::endl<< "\n";
@@ -665,13 +666,13 @@ void ChatRoomWidget::sendInput()
     if (Fixed[i-1] == ' ' && isalpha(Fixed[i])) {
             words++;}    } 
         if (isalpha(Fixed[0])) {words++;}
-    std::cout << "The number of words is: " << words << "\n"; 
+    std::cout << "The number of words is : " << words << "\n"; 
     if (_SentMessage <= 10) {
     rl.push_back(miTexto);
     }
         else {
         rl.erase(rl.begin());
-        rl.push_back(miTexto);
+        rl.push_back(miTexto);  
          }
     int numberofMessage = 1;
     for (std::string str: rl) {

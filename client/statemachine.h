@@ -17,6 +17,9 @@ class StateMachine
     private:
     Estado _estado = Nombre;
     std::string _nombre;
+    std::string _respuesta;
 
     void onNombre(std::string mensaje);
+    void onEdad(std::string mensaje);
+    void onColor(std::string mensaje);
 };

@@ -25,7 +25,7 @@
 #include <uriresolver.h>
 
 #include <QtWidgets/QMainWindow>
-
+    
 namespace Quotient {
     class Room;
     class Connection;
